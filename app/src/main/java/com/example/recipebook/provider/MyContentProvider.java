@@ -1,4 +1,4 @@
-package com.example.recipebook;
+package com.example.recipebook.provider;
 
 import com.example.recipebook.MyDBHandler;
 
@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.TextUtils;
 
 public class MyContentProvider extends ContentProvider {
 
@@ -33,8 +34,34 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // Implement this to handle requests to delete one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        int uriType = sURIMatcher.match(uri);
+        SQLiteDatabase sqlDB = myDB.getWritableDatabase();
+        int rowsDeleted = 0;
+        switch (uriType) {
+            case RECIPES:
+                rowsDeleted = sqlDB.delete(MyDBHandler.TABLE_RECIPES,
+                        selection,
+                        selectionArgs);
+                break;
+            case RECIPES_ID:
+                String id = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(MyDBHandler.TABLE_RECIPES,
+                            MyDBHandler.COLUMN_ID + "=" + id,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(MyDBHandler.TABLE_RECIPES,
+                            MyDBHandler.COLUMN_ID + "=" + id
+                                    + " and " + selection,
+                            selectionArgs);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI: " +
+                        uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rowsDeleted;
     }
 
     @Override
@@ -89,7 +116,41 @@ public class MyContentProvider extends ContentProvider {
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
-        // TODO: Implement this to handle requests to update one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        int uriType = sURIMatcher.match(uri);
+        SQLiteDatabase sqlDB = myDB.getWritableDatabase();
+        int rowsUpdated = 0;
+        switch (uriType) {
+            case RECIPES:
+                rowsUpdated =
+                        sqlDB.update(MyDBHandler.TABLE_RECIPES,
+                                values,
+                                selection,
+                                selectionArgs);
+                break;
+            case RECIPES_ID:
+                String id = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated =
+                            sqlDB.update(MyDBHandler.TABLE_RECIPES,
+                                    values,
+                                    MyDBHandler.COLUMN_ID + "=" + id,
+                                    null);
+                } else {
+                    rowsUpdated =
+                            sqlDB.update(MyDBHandler.TABLE_RECIPES,
+                                    values,
+                                    MyDBHandler.COLUMN_ID + "=" + id
+                                            + " and "
+                                            + selection,
+                                    selectionArgs);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI: "
+                        + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri,
+                null);
+        return rowsUpdated;
     }
 }

@@ -22,7 +22,7 @@
         <activity android:name=".SearchActivity" />
 
         <provider
-            android:name=".MyContentProvider"
+            android:name=".provider.MyContentProvider"
             android:authorities="com.example.recipebook.provider.MyContentProvider"
             android:enabled="true"
             android:exported="true"></provider>

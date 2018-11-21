@@ -16,9 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".SearchActivity"></activity>
+        <activity
+            android:name=".AddActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".SearchActivity" />
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="com.example.recipebook.provider.MyContentProvider"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>

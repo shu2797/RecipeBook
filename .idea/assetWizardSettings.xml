@@ -3,37 +3,44 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="vectorWizard">
+        <entry key="imageWizard">
           <value>
             <PersistentState>
               <option name="children">
                 <map>
-                  <entry key="vectorAssetStep">
+                  <entry key="imageAssetPanel">
                     <value>
                       <PersistentState>
                         <option name="children">
                           <map>
-                            <entry key="clipartAsset">
+                            <entry key="launcher">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="foregroundClipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_local_dining_black_24dp.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_close_black_24dp.xml" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="0eff00" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="height" value="75" />
-                            <entry key="outputName" value="ic_cancel" />
-                            <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\mayur" />
-                            <entry key="width" value="75" />
                           </map>
                         </option>
                       </PersistentState>

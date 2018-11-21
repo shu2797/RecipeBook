@@ -22,7 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_RECIPETEXT = "recipetext";
 
 
-    public MyDBHandler(@androidx.annotation.Nullable Context context, @androidx.annotation.Nullable String name, @androidx.annotation.Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public MyDBHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
         myCR = context.getContentResolver();
     }
@@ -53,7 +53,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public Recipe findRecipe(String recipename){
         String[] projection = {COLUMN_ID,
                 COLUMN_RECIPENAME, COLUMN_RECIPETEXT };
-        String selection = "productname = \"" + productname + "\"";
+        String selection = "productname = \"" + recipename + "\"";
         Cursor cursor = myCR.query(MyContentProvider.CONTENT_URI,
                 projection, selection, null,
                 null);

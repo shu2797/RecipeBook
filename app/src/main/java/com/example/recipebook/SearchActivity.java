@@ -47,7 +47,6 @@ public class SearchActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, pos, l) -> {
             Recipe selectedRecipe = (Recipe) listView.getItemAtPosition(pos);
-            Toast.makeText(getApplicationContext(), "ID selected: " + Integer.toString(selectedRecipe.get_id()), Toast.LENGTH_SHORT).show();
 
             Intent i = new Intent(getApplicationContext(), ViewActivity.class);
             i.putExtra("id", selectedRecipe.get_id());

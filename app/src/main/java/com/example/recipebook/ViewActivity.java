@@ -28,6 +28,7 @@ public class ViewActivity extends AppCompatActivity {
         deleteFAB = findViewById(R.id.view_deleteFAB);
 
         TooltipCompat.setTooltipText(editFAB, "Edit recipe");
+        TooltipCompat.setTooltipText(deleteFAB, "Delete recipe");
 
         id = getIntent().getExtras().getInt("id");
 

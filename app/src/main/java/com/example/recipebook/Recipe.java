@@ -1,5 +1,7 @@
 package com.example.recipebook;
 
+import java.util.Comparator;
+
 public class Recipe {
     private int _id;
     private String recipeName, recipeText;
@@ -40,5 +42,20 @@ public class Recipe {
 
     public String getRecipeText() {
         return recipeText;
+    }
+
+    public static Comparator<Recipe> RecipeNameComparator = new Comparator<Recipe>() {
+        @Override
+        public int compare(Recipe recipe1, Recipe recipe2) {
+            String name1 = recipe1.getRecipeName();
+            String name2 = recipe2.getRecipeName();
+
+            return name1.compareToIgnoreCase(name2);
+        }
+    };
+
+    @Override
+    public String toString(){
+        return this.getRecipeName();
     }
 }

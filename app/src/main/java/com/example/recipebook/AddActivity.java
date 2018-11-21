@@ -1,6 +1,7 @@
 package com.example.recipebook;
 
 import android.content.DialogInterface;
+import android.support.design.circularreveal.CircularRevealWidget;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -61,7 +63,11 @@ public class AddActivity extends AppCompatActivity {
         saveFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MyDBHandler dbHandler = new MyDBHandler(getBaseContext(), null, null, 1);
+                Recipe recipe = new Recipe(recipeName.getText().toString(), recipeText.getText().toString());
+                dbHandler.addRecipe(recipe);
+                Toast.makeText(getApplicationContext(),"Recipe saved", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

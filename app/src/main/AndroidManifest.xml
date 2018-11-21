@@ -25,7 +25,9 @@
             android:name=".provider.MyContentProvider"
             android:authorities="com.example.recipebook.provider.MyContentProvider"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
+
+        <activity android:name=".ViewActivity"></activity>
     </application>
 
 </manifest>

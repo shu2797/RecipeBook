@@ -1,11 +1,9 @@
 package com.example.recipebook;
 
-import android.content.DialogInterface;
-import android.support.design.circularreveal.CircularRevealWidget;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
 import android.view.View;
 import android.widget.EditText;
@@ -30,39 +28,36 @@ public class AddActivity extends AppCompatActivity {
         TooltipCompat.setTooltipText(cancelFAB, "Discard and go back");
         TooltipCompat.setTooltipText(saveFAB, "Add new recipe record to recipe book");
 
-        cancelFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if((!recipeText.getText().toString().isEmpty()) || (!recipeName.getText().toString().isEmpty())){
-                    AlertDialog.Builder alert = new AlertDialog.Builder(AddActivity.this);
+        cancelFAB.setOnClickListener(view -> {
+            if((!recipeText.getText().toString().isEmpty()) || (!recipeName.getText().toString().isEmpty())){
+                AlertDialog.Builder alert = new AlertDialog.Builder(AddActivity.this);
 
-                    alert
-                            .setTitle("Are you sure?")
-                            .setMessage("This will discard everything you typed and go back")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            });
-                    AlertDialog alertDialog = alert.create();
-                    alertDialog.show();
-                } else {
-                    finish();
-                }
+                alert
+                        .setTitle("Are you sure?")
+                        .setMessage("This will discard everything you typed and go back")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", (dialogInterface, i) -> finish())
+                        .setNegativeButton("No", (dialogInterface, i) -> {});
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            } else {
+                finish();
             }
         });
 
-        saveFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        saveFAB.setOnClickListener(view -> {
+            if(recipeName.getText().toString().isEmpty()){
+                AlertDialog.Builder alert = new AlertDialog.Builder(AddActivity.this);
+
+                alert
+                        .setTitle("Blank name")
+                        .setMessage("Sorry, you cannot leave the recipe name blank")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialogInterface, i) -> {
+                        });
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            } else {
                 MyDBHandler dbHandler = new MyDBHandler(getBaseContext(), null, null, 1);
                 Recipe recipe = new Recipe(recipeName.getText().toString(), recipeText.getText().toString());
                 dbHandler.addRecipe(recipe);
@@ -81,17 +76,9 @@ public class AddActivity extends AppCompatActivity {
                     .setTitle("Are you sure?")
                     .setMessage("This will discard everything you typed and go back")
                     .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                    .setPositiveButton("Yes", (dialogInterface, i) -> finish())
+                    .setNegativeButton("No", (dialogInterface, i) -> {
 
-                        }
                     });
             AlertDialog alertDialog = alert.create();
             alertDialog.show();

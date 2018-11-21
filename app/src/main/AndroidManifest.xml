@@ -27,7 +27,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ViewActivity"></activity>
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".EditActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
     </application>
 
 </manifest>

@@ -1,3 +1,8 @@
+/*
+Recipe.java
+Structure for recipes
+ */
+
 package com.example.recipebook;
 
 import java.util.Comparator;
@@ -44,16 +49,15 @@ public class Recipe {
         return recipeText;
     }
 
-    public static Comparator<Recipe> RecipeNameComparator = new Comparator<Recipe>() {
-        @Override
-        public int compare(Recipe recipe1, Recipe recipe2) {
-            String name1 = recipe1.getRecipeName();
-            String name2 = recipe2.getRecipeName();
+    //comparator function used to sort recipes alphabetically using recipe name
+    public static Comparator<Recipe> RecipeNameComparator = (recipe1, recipe2) -> {
+        String name1 = recipe1.getRecipeName();
+        String name2 = recipe2.getRecipeName();
 
-            return name1.compareToIgnoreCase(name2);
-        }
+        return name1.compareToIgnoreCase(name2);
     };
 
+    //when toString() is called on a recipe data type, get and return recipe name
     @Override
     public String toString(){
         return this.getRecipeName();

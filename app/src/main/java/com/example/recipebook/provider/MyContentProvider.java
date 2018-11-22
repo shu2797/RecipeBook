@@ -1,6 +1,9 @@
-package com.example.recipebook.provider;
+/*
+MyContentProvider.java
+content provider to manage database
+ */
 
-import com.example.recipebook.MyDBHandler;
+package com.example.recipebook.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -10,6 +13,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+
+import com.example.recipebook.MyDBHandler;
 
 public class MyContentProvider extends ContentProvider {
 
@@ -32,6 +37,7 @@ public class MyContentProvider extends ContentProvider {
     public MyContentProvider() {
     }
 
+    //delete record from database
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
@@ -71,6 +77,7 @@ public class MyContentProvider extends ContentProvider {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    //add a new record in th database
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
@@ -93,6 +100,7 @@ public class MyContentProvider extends ContentProvider {
         return false;
     }
 
+    //find a record or set of records in database
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
@@ -113,6 +121,7 @@ public class MyContentProvider extends ContentProvider {
         return cursor;
     }
 
+    //update a record in database
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {

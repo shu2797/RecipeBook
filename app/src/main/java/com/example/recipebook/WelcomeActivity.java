@@ -1,12 +1,15 @@
+/*
+WelcomeActivity.java
+App launches into this activity. Contains SEARCH and ADD buttons.
+ */
+
 package com.example.recipebook;
 
 import android.content.Intent;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
-import android.view.View;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -18,27 +21,22 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        searchFAB = findViewById(R.id.searchFAB);
-        addFAB = findViewById(R.id.addFAB);
+        searchFAB = findViewById(R.id.searchFAB); //search button
+        addFAB = findViewById(R.id.addFAB); //add button
 
+        //Tooltips on buttons
         TooltipCompat.setTooltipText(searchFAB, "Search and edit recipes");
         TooltipCompat.setTooltipText(addFAB, "Add new recipe to recipe book");
 
-
-        searchFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(i);
-            }
+        //Buttons onClick listeners
+        searchFAB.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(i);
         });
 
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AddActivity.class);
-                startActivity(i);
-            }
+        addFAB.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), AddActivity.class);
+            startActivity(i);
         });
     }
 }

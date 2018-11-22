@@ -1,6 +1,9 @@
-package com.example.recipebook;
+/*
+MyDBHandler.java
+database handler which connects to content provider to manage database
+ */
 
-import com.example.recipebook.provider.MyContentProvider;
+package com.example.recipebook;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -8,6 +11,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.recipebook.provider.MyContentProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //add recipe to database
     public void addRecipe(Recipe recipe){
         ContentValues values = new ContentValues();
         values.put(COLUMN_RECIPENAME, recipe.getRecipeName());
@@ -53,6 +59,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         myCR.insert(MyContentProvider.CONTENT_URI, values);
     }
 
+    //find recipe using recipe name
     public Recipe findRecipe(String recipename){
         String[] projection = {COLUMN_ID,
                 COLUMN_RECIPENAME, COLUMN_RECIPETEXT };
@@ -73,6 +80,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return recipe;
     }
 
+    //find recipe using recipe id
     public Recipe findRecipe(int recipeID){
         String[] projection = {COLUMN_ID, COLUMN_RECIPENAME, COLUMN_RECIPETEXT};
         String selection = COLUMN_ID + " = " + Integer.toString(recipeID);
@@ -90,16 +98,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return recipe;
     }
 
+    //update recipe in database
     public void updateRecipe(Recipe recipe, int id){
         ContentValues values = new ContentValues();
         values.put(COLUMN_RECIPENAME, recipe.getRecipeName());
         values.put(COLUMN_RECIPETEXT, recipe.getRecipeText());
-        //String[] projection = {COLUMN_ID, COLUMN_RECIPENAME, COLUMN_RECIPETEXT};
-        //String selection = COLUMN_ID + " = " + Integer.toString(recipe.get_id());
-        //Cursor cursor = myCR.query(MyContentProvider.CONTENT_URI, projection, selection, null, null);
         myCR.update(MyContentProvider.CONTENT_URI, values, COLUMN_ID + " = " + Integer.toString(id), null);
     }
 
+    //return a list of all recipes
     public List<Recipe> listAllRecipes(){
         List<Recipe> recipeList = new ArrayList<>();
 
@@ -127,6 +134,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return recipeList;
     }
 
+    //delete recipe using recipe name
     public boolean deleteRecipe(String recipename){
         boolean result = false;
         String selection = "recipename = \"" + recipename + "\"";
@@ -137,6 +145,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    //delete recipe using recipe id
     public boolean deleteRecipe(int recipeID){
         boolean result = false;
         String selection = COLUMN_ID + " = " + Integer.toString(recipeID);

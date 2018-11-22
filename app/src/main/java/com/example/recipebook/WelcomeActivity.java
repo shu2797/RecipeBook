@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.TooltipCompat;
+import android.util.Log;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -20,6 +21,8 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        Log.d("recipeBook", "Welcome");
 
         searchFAB = findViewById(R.id.searchFAB); //search button
         addFAB = findViewById(R.id.addFAB); //add button

@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.TooltipCompat;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class ViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
+
+        Log.d("recipeBook", "View");
 
         recipeName = findViewById(R.id.view_recipeName);
         recipeText = findViewById(R.id.view_recipeText);
@@ -54,6 +57,8 @@ public class ViewActivity extends AppCompatActivity {
 
     //retrieve latest recipe content of the selected id and display it
     protected void displayRecipe(){
+        Log.d("recipeBook", "Retrieving recipe contents");
+
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
         //retrieve latest recipe name and instructions based on id selected
@@ -82,6 +87,7 @@ public class ViewActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setPositiveButton("Yes", (dialogInterface, i) -> {
                         dbHandler.deleteRecipe(id);
+                        Log.d("recipeBook", "Recipe deleted");
                         Toast.makeText(getApplicationContext(),"Recipe deleted", Toast.LENGTH_SHORT).show();
                         finish();
                     })

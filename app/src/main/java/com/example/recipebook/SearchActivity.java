@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +25,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        Log.d("recipeBook", "Search");
+
         populateList();
     }
 
@@ -36,6 +39,8 @@ public class SearchActivity extends AppCompatActivity {
 
     //refresh and update list with latest database contents
     protected void populateList(){
+        Log.d("recipeBook", "Updating listView");
+
         listView = findViewById(R.id.search_listView);
 
         //database handler
@@ -57,6 +62,8 @@ public class SearchActivity extends AppCompatActivity {
         //when user selects a recipe in the list
         listView.setOnItemClickListener((adapterView, view, pos, l) -> {
             Recipe selectedRecipe = (Recipe) listView.getItemAtPosition(pos);
+
+            Log.d("recipeBook", "Selected recipe with ID: " + Integer.toString(selectedRecipe.get_id()));
 
             //launch ViewActivity to view recipe
             Intent i = new Intent(getApplicationContext(), ViewActivity.class);

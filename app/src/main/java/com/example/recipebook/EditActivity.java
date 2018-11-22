@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.TooltipCompat;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        Log.d("recipeBook", "Edit");
 
         MyDBHandler dbHandler = new MyDBHandler(getApplicationContext(), null, null, 1);
 
@@ -86,6 +89,7 @@ public class EditActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", (dialogInterface, i) -> {
                             Recipe recipe = new Recipe(recipeName.getText().toString(), recipeText.getText().toString());
                             dbHandler.updateRecipe(recipe, id);
+                            Log.d("recipeBook", "Recipe updated");
                             Toast.makeText(getApplicationContext(), "Recipe updated", Toast.LENGTH_SHORT).show();
                             finish();
                         })

@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.TooltipCompat;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        Log.d("recipeBook", "Add");
 
         cancelFAB = findViewById(R.id.add_cancelFAB); //cancel button
         saveFAB = findViewById(R.id.add_saveFAB); //save button
@@ -71,6 +74,7 @@ public class AddActivity extends AppCompatActivity {
                 MyDBHandler dbHandler = new MyDBHandler(getBaseContext(), null, null, 1);
                 Recipe recipe = new Recipe(recipeName.getText().toString(), recipeText.getText().toString());
                 dbHandler.addRecipe(recipe);
+                Log.d("recipeBook", "Recipe saved");
                 Toast.makeText(getApplicationContext(),"Recipe saved", Toast.LENGTH_SHORT).show();
                 finish();
             }
